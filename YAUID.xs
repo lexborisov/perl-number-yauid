@@ -18,6 +18,7 @@ char error_text[][64] = {
     "OK",
     "Can't create key file",
     "Can't open key file",
+    "Can't read node id file",
     "All key in current sec done",
     "Can't read size for file node_id",
     "Can't allocate memory for node_id",
@@ -288,7 +289,12 @@ yauid * yauid_init(const char *filepath_key, const char *filepath_node_id)
                         return yaobj;
                     }
                     
-                    fread(text, sizeof(char), h_size, h_node_id);
+                    if(fread(text, sizeof(char), h_size, h_node_id) != h_size) {
+                        fclose(h_node_id);
+                        yaobj->error = YAUID_ERROR_READ_NODE_ID_FILE;
+                        return yaobj;
+                    }
+                    
                     fclose(h_node_id);
                     
                     long i = 0;
