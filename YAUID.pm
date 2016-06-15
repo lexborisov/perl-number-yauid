@@ -5,7 +5,7 @@ use strict;
 use vars qw($AUTOLOAD $VERSION $ABSTRACT @ISA @EXPORT);
 
 BEGIN {
-	$VERSION = 1.60;
+	$VERSION = 1.61;
 	$ABSTRACT = "A decentralized unique ID generator (int64)";
 	
 	@ISA = qw(Exporter DynaLoader);
